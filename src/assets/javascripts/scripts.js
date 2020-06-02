@@ -11,13 +11,15 @@ const setSearchProcessing = status => {
   const input = document.getElementById('search-input');
   const button = document.getElementById('search-button');
 
-  button[status ? 'setAttribute': 'removeAttribute']('disabled', status);
-  input[status ? 'setAttribute': 'removeAttribute']('disabled', status);
+  const elementAction = status ? 'setAttribute': 'removeAttribute';
 
-  const icon = button.firstElementChild.classList;
+  button[elementAction]('disabled', status);
+  input[elementAction]('disabled', status);
 
-  icon[status ? 'remove' : 'add']('fa-search')
-  icon[!status ? 'remove' : 'add']('fa-spinner', 'fa-spin')
+  const iconClasses = button.firstElementChild.classList;
+
+  iconClasses[status ? 'remove' : 'add']('fa-search')
+  iconClasses[!status ? 'remove' : 'add']('fa-spinner', 'fa-spin')
 };
 
 const getUser = username => axios.get(`https://api.github.com/search/users?q=${username}`)
@@ -30,9 +32,13 @@ const handleGetUser = async (value) => {
 
   if (results) {
     results.remove();
-  } else if (alert) {
+  }
+
+  if (alert) {
     alert.remove();
-  } else if (!value || !value.length) {
+  }
+
+  if (!value || !value.length) {
     handleAlert('Please, type a username!');
   } else {
     setSearchProcessing(true);
