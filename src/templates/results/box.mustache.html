@@ -1,0 +1,19 @@
+<ul id="results" class="results">
+  {{#users}}
+    <li class="results-item">
+      <a href="{{html_url}}" target="_blank">
+        <div class="results-thumb">
+          <img
+            src="{{avatar_url}}"
+            alt="{{login}}"
+            width="32"
+            height="32"
+          />
+        </div>
+        <div class="results-username">
+          <span>{{login}}</span>
+        </div>
+      </a>
+    </li>
+  {{/users}}
+</ul>
